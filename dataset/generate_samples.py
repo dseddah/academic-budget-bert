@@ -79,7 +79,7 @@ if __name__ == "__main__":
         if "roberta" in args.model_name:
             hdf5_preprocessing_cmd = "python dataset/data/create_pretraining_data_roberta.py"
         else:
-            hdf5_preprocessing_cmd = "python dataset/create_pretraining_data.py"
+            hdf5_preprocessing_cmd = "python dataset/data/create_pretraining_data.py"
         hdf5_preprocessing_cmd += f" --input_file={f_path}"
         hdf5_preprocessing_cmd += f" --output_file={output_filename}"
         hdf5_preprocessing_cmd += (
