@@ -1,3 +1,6 @@
+(just a quick fork to test various things and not mess with upstream)
+
+
 # Training BERT with Compute/Time (Academic) Budget
 
 This repository contains scripts for pre-training and finetuning BERT-like models with limited time and compute budget.
