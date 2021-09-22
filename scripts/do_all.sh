@@ -1,13 +1,14 @@
 #!/bin/sh
+SCRIPTDIR=`pwd $0`
 RAWDATA=$1
 MODELDIR=$2
 VOCFILE=$3
 
 echo " ==> reading raw data from $RAWDATA"
-echo "./prepare_data.sh $RAWDATA $RAWDATA/shards"
+echo "$SCRIPTDIR/prepare_data.sh $RAWDATA $RAWDATA/shards"
 rm -rf $RAWDATA/shards
 mkdir -p $RAWDATA/shards
-./prepare_data.sh $RAWDATA $RAWDATA/shards
+$SCRIPTDIR/prepare_data.sh $RAWDATA $RAWDATA/shards
 NBFILESCREATED=`ls $RAWDATA/shards/* |wc -l`
 echo "$NBFILESCREATED in $RAWDATA/shards"
 
@@ -15,7 +16,7 @@ echo "$NBFILESCREATED in $RAWDATA/shards"
 
 
 echo " ==> Preparing pretrain files from $RAWDATA/shards"
-echo "./prepare_train_files.sh $RAWDATA/shards/ $RAWDATA/shards2PreTrain/ $VOCFILE"
+echo "$SCRIPTDIR/prepare_train_files.sh $RAWDATA/shards/ $RAWDATA/shards2PreTrain/ $VOCFILE"
 
 rm -rf $RAWDATA/shards2PreTrain/
 mkdir -p $RAWDATA/shards2PreTrain/
@@ -27,7 +28,7 @@ echo "$NBFILESCREATED in $RAWDATA/shards2PreTrain/"
 exit
 
 echo "===> running pretraining"
-echo "./run_pretraining.sh $RAWDATA/shards2PreTrain/ $MODELDIR"
+echo "$SCRIPTDIR/run_pretraining.sh $RAWDATA/shards2PreTrain/ $MODELDIR"
 ./run_pretraining.sh $RAWDATA/shards2PreTrain/ $MODELDIR
 
 du -h $MODELDIR
