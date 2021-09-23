@@ -548,6 +548,17 @@ def main():
         "bert-large-uncased, bert-base-cased, bert-base-multilingual, bert-base-chinese.",
     )
 
+    parser.add_argument(
+        "--vocab_file",
+        default=None,
+        type=str,
+        required=False,
+        help="The vocabulary the BERT model will train on.",
+    )
+
+
+
+
     # int
     parser.add_argument(
         "--max_seq_length",

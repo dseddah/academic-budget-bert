@@ -30,6 +30,9 @@ from transformers import BertTokenizer
 
 from utils import convert_to_unicode
 
+# Debug stuff by Djamé
+import dumper
+dumper.max_depth = 10 
 
 class TrainingInstance(object):
     """A single training instance (sentence pair)."""
@@ -77,7 +80,8 @@ def write_instance_to_example_file(
     if not no_nsp:
         features["next_sentence_labels"] = np.zeros(num_instances, dtype="int32")
 
-    for inst_index, instance in enumerate(tqdm(instances)):
+    for inst_index, instance in enumerate(instances): # Djame (tqdm(instances))
+        dumper.dump(instance.tokens)
         input_ids = tokenizer.convert_tokens_to_ids(instance.tokens)
         input_mask = [1] * len(input_ids)
         segment_ids = list(instance.segment_ids)
@@ -103,12 +107,13 @@ def write_instance_to_example_file(
 
         # next_sentence_label = 1 if instance.is_random_next else 0
 
+        #dumper.dump(input_ids)
         features["input_ids"][inst_index] = input_ids
         features["input_mask"][inst_index] = input_mask
         features["segment_ids"][inst_index] = segment_ids
         features["masked_lm_positions"][inst_index] = masked_lm_positions
         features["masked_lm_ids"][inst_index] = masked_lm_ids
-
+        #break #djame
         if not no_nsp:
             features["next_sentence_labels"][inst_index] = 1 if instance.is_random_next else 0
 
