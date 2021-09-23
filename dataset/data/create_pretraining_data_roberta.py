@@ -553,7 +553,7 @@ def main():
         default=None,
         type=str,
         required=False,
-        help="The vocabulary the BERT model will train on.",
+        help="DUMMY: THIS PARAMETER IS NOT USED HERE ! The vocabulary the BERT model will train on.",
     )
 
 
